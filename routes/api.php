@@ -16,7 +16,7 @@ Route::controller(RegisterController::class)->group(function() {
 Route::middleware('auth:sanctum')->group( function () {
     Route::post('/books/create', [BooksController::class, 'create']);
     Route::get('/books', [BooksController::class, 'get']);
-    Route::post('/books/update/{book}', [BooksController::class, 'update']);
-    Route::delete('/books/delete/{book}', [BooksController::class, 'delete']);
+    Route::post('/books/update/{book}', [BooksController::class, 'update'])->middleware('check-owner');
+    Route::delete('/books/delete/{book}', [BooksController::class, 'delete'])->middleware('check-owner');
     Route::get('/books/get/{book}', [BooksController::class, 'getSingular']);
 });

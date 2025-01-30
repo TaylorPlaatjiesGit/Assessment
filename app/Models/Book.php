@@ -15,4 +15,9 @@ class Book extends Model
         'title',
         'description',
     ];
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
 }

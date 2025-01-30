@@ -17,7 +17,7 @@ class BooksController extends Controller
             'description' => 'nullable'
         ]);
 
-        $book = Book::create($data);
+        $request->user()->books()->create($data);
 
         Cache::forget('books_all');
 
@@ -51,6 +51,8 @@ class BooksController extends Controller
     public function delete(Request $request, Book $book): JsonResponse
     {
         $book->delete();
+
+        Cache::forget('books_all');
 
         return response()->json($book);
     }
